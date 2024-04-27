@@ -1,0 +1,16 @@
+/* Global CSS variables */
+:root {
+  --padding-small: 10px;
+  --padding-large: 20px;
+  --header-height: 70px;
+  --sidenav-width: 250px;
+  --color-outline: #1679AB;
+}
+
+/* Global CSS resets */
+* {
+  box-sizing: border-box;
+  margin:0;
+  padding: 0;
+}
+
