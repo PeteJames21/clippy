@@ -1,11 +1,11 @@
 "use client";
 
 import styles from './dashboard.module.css';
-import {dummy_items} from '../../lib/data';
+import {collections} from '../../lib/data';
 import {useState} from 'react';
 
 export default function CollectionBox({repo}) {
-  const itemsList = dummy_items;  // Replace with async fetch
+  const itemsList = collections;  // Replace with async fetch
   const [items, setItems] = useState(itemsList);
 
   return (
