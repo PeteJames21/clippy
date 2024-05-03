@@ -4,7 +4,7 @@ import Image from "next/image"
 
 export default function Header() {
   return (
-    <nav className={styles.nav}>
+    <nav className={styles.header}>
       <div className={styles.logo}>(●'◡'●)</div>
       <div><input type="text" id="searchInput" className={styles["search-content"]} placeholder="Search for content..." /></div>
       <div className={styles['header-right']}>

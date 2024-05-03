@@ -4,10 +4,12 @@ import styles from "../ui/dashboard/dashboard.module.css"
 
 export default function Layout ({ children }) {
   return (
-    <>
+    <div className={styles.app}>
       <Header />
-      <SideNav />
-      <div className={styles.main}>{ children }</div>
-    </>
+      <div className={styles.content}>
+        <SideNav />
+        <div className={styles.main}>{ children }</div>
+      </div>
+    </div>
   );
 }
