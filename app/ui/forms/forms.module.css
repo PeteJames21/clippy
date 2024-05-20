@@ -1,0 +1,101 @@
+.textArea {
+  resize: none;
+  width: 600px;
+  height: 300px;
+  /* TODO: make font large */
+}
+
+.radioGroup {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.fileUploadSection {
+display: flex;
+flex-direction: column;
+padding: 10px;
+border: 1px solid black;
+width: fit-content;
+}
+
+.dropZone {
+display: flex;
+flex-direction: row;
+align-items: center;
+}
+
+.divider {
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+}
+
+.dividerText {
+margin-left: 10px;
+margin-right: 10px;
+}
+
+.dropImage {
+margin-right: 10px;
+}
+
+.dotted-line {
+border-top: 3px dotted black;
+width: 100%;
+}
+
+.text-input {
+width: 400px;
+padding: 10px 10px 10px 20px;
+border: 1px solid black;
+border-radius: 20px;
+}
+
+.upload_form {
+display: flex;
+flex-direction: column;
+margin: 10px;
+width: 700px;
+border: 1px solid black;
+padding: 10px;
+gap: 10px;
+}
+
+.tagSelectionArea {
+display: flex;
+flex-direction: column;
+gap: 10px;
+width: inherit;
+}
+
+.tag-list {
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+gap: 5px;
+}
+
+.tag-list-item {
+display: flex;
+flex-direction: row;
+background-color: #96b8da;
+border-radius: 20px;
+padding: 10px;
+gap: 5px;
+}
+
+.trash-icon {
+cursor: pointer;
+align-self: center;
+}
+
+.item-description {
+height: 150px;
+}
+
+.upload-button {
+width: 30%;
+align-self: center;
+}

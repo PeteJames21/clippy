@@ -6,13 +6,16 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/react-dom": "^18.3.0",
+    "bootstrap": "^5.3.3",
     "next": "^14.2.3",
     "react": "^18.3.0",
     "react-dom": "^18.3.0"
   },
   "devDependencies": {
+    "@types/bootstrap": "^5.2.10",
     "@types/node": "20.12.7",
-    "@types/react": "18.3.1",
+    "@types/react": "^18.3.1",
     "typescript": "5.4.5"
   }
 }
