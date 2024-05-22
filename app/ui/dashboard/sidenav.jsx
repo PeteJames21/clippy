@@ -6,7 +6,7 @@ export default function SideNav() {
   return (
     <div className={styles.sidenav}>
       <Link href="/upload">
-      <button>+ Add Item</button>
+      <button className="btn btn-primary btn-lg btn-block">+ Add Item</button>
       </Link>
       <CollectionBox repo="Public Collection"/>
       <CollectionBox repo="Private Collection"/>
