@@ -1,11 +1,16 @@
 import Image from "next/image";
 import styles from "./forms.module.css";
+import { MouseEvent } from "react";
 
-export default function TagListItem({label}) {
+export default function TagListItem({label, itemId}) {
   return (
     <div className={styles["tag-list-item"]}>
       {label}
-      <Image className={styles["trash-icon"]} src="trash-icon.svg" width={20} height={20} alt=""/>
+      <Image
+        id={itemId}
+        className={styles["trash-icon"]}
+        src="trash-icon.svg" width={20} height={20}
+        alt=""/>
     </div>
   );
 }
