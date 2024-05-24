@@ -158,6 +158,7 @@ export default function UploadForm() {
 
     {/* Section for uploading text */}
       <div className={textUploadSectionVisible? "": styles.hidden}>
+        <p className="h5">Create a Text Item</p>
         <textarea className={styles.textArea}
           id="textItemContent" name="textItemContent"
           placeholder="Enter text here..."
@@ -186,7 +187,7 @@ export default function UploadForm() {
 
     {/* Section for providing ttem Description */}
     <div>
-      <p>Optional description (e.g. purpose, sources, etc.):</p>
+      <p className="h5">Item description (e.g. purpose, sources, etc.)</p>
       <textarea className={`${styles.textArea} ${styles["item-description"]}`}
         name="description" placeholder="Enter item description"
         onChange={handleTextAreaChange}>
@@ -195,6 +196,7 @@ export default function UploadForm() {
 
     {/* Section for adding tags */}
     <div className={styles.tagSelectionArea}>
+      <p className="h5">Create Tags for Your Item</p>
       <div>
         <input type="text"
         name="tag"
@@ -216,7 +218,7 @@ export default function UploadForm() {
 
     {/* Section for selecting the collection */}
     <div className={styles["collection-list"]}>
-      <p>Choose a Collection</p>
+      <p className="h5">Choose a Collection</p>
       <input
         type="text"
         name="collectionName"
