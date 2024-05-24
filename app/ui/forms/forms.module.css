@@ -57,10 +57,12 @@ border-radius: 20px;
 display: flex;
 flex-direction: column;
 margin: 10px;
-width: 700px;
+width: fit-content;
 border: 1px solid black;
-padding: 10px;
+padding: 20px;
 gap: 10px;
+color: black;
+background-color: white;
 }
 
 .tagSelectionArea {
@@ -102,4 +104,16 @@ align-self: center;
 
 .hidden {
   display: none;
+}
+
+.infoToolTip {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0d6efd;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
 }

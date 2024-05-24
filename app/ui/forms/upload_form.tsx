@@ -2,7 +2,7 @@
 import Image from "next/image";
 import TagListItem from "./TagListItem";
 import styles from "./forms.module.css";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect, FormEventHandler, ChangeEvent } from "react";
 import React from "react";
 import { MouseEvent } from "react";
 import { v4 as uuidv4 } from 'uuid';
@@ -11,6 +11,8 @@ export default function UploadForm() {
   const [textUploadSectionVisible, toggleTextUploadSectionVisibility] = useState(1);
   const [imageUploadSectionVisible, toggleImageUploadSectionVisibility] = useState(0);
   const [tags, setTags] = useState([]);
+  const [collection, setCollection] = useState("");
+  const formModified = useRef(false);
 
   // Object for storing form data from all fields
   const data = useRef(null);
@@ -21,8 +23,8 @@ export default function UploadForm() {
       imgURL: "",
       description: "",
       collectionName: "",
-      tags: [],
-      textItemContent: ""
+      textItemContent: "",
+      tags: []
     }
 }
 
@@ -48,7 +50,7 @@ export default function UploadForm() {
   }
 
   function handleTextAreaChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
-    const value = event.target.value;
+    const value = event.target.value.trim();
     const target = event.target.getAttribute('name');
     data.current = {...data.current, [target]: value};
   }
@@ -56,25 +58,86 @@ export default function UploadForm() {
   function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
     if (event.key === 'Enter') {
       event.preventDefault();  // Prevent the form from being submitted
+      const value = event.currentTarget.value.trim();
+      if (value === "") {
+        event.currentTarget.value = ""
+        return;
+      }
+      if (tags.some(item => item.value === value)){
+        // Item already exists
+        event.currentTarget.value = "";
+        return;
+      }
       if (tags.length === 5) {
         // Cannot have > 5 tags
         alert('cant have more than 5 tags');
         return;
       }
-      const value = event.currentTarget.value;
-      event.currentTarget.value = "";
-      setTags([...tags, {'value': value, key: uuidv4()}]);
+      event.currentTarget.value = "";  // Clear the input field
+      const newTag = {'value': value, key: uuidv4()}
+      setTags([...tags, newTag]);  // Update state for displaying the list
+      // Update ref for storing the values
+      const tagValues = [...tags, newTag].map(
+        item => item.value
+      )
+      data.current.tags = tagValues;
     }
   }
 
+  /**
+   * Delete the clicked tag
+   */
   function handleClick(event: MouseEvent) {
     const itemId  = (event.target as HTMLElement).getAttribute('id');
     const newList = tags.filter(item => item.key !== itemId);
     setTags(newList);
   }
 
+  function handleCollectionNameChange(event: ChangeEvent<HTMLInputElement>) {
+    setCollection(event.target.value);
+    data.current.collectionName = event.target.value;
+  }
+
+  function handleOnSubmit(event: SubmitEvent) {
+    event.preventDefault();
+    formModified.current = false
+    // TODO: add validation functions here
+    const uploadData = {
+      ...data.current,
+    }
+    alert('submitted');
+    console.log(uploadData);
+    console.log('submitted');
+  }
+
+  useEffect(
+    () => {
+      // Warn the user of potential data loss when attempting to refresh the form
+      // or navigate away from it while it still has unsaved changes.
+      const formFields = document.querySelectorAll('input, textarea, select');
+      formFields.forEach(field => {
+        field.addEventListener("change", () => {
+            formModified.current = true;
+        });
+      });
+
+      window.addEventListener("beforeunload", function (e) {
+        if (formModified) {
+          e.preventDefault();
+        }
+      });
+    }, []
+  )
+
+  // Prevent default form behavior on submit
+  useEffect(
+    () => {
+      document.querySelector('form').addEventListener('submit', handleOnSubmit)
+    }, []
+  )
   return (
     <form action="" id="upload-form" className={styles.upload_form}>
+      <p className="h3 text-center">Upload a New Item</p>
       <div>
         <div className={styles["radioGroup"]}>
           <div>Item visibility</div>
@@ -138,7 +201,7 @@ export default function UploadForm() {
         className={styles["text-input"]}
         placeholder="Add a tag"
         onKeyDown={handleKeyDown}/>
-        <span>?</span>
+        <span className={styles.infoToolTip} id="tagInfoTooltip">?</span>
       </div>
       <div className={styles["tag-list"]} onClick={handleClick}>
         {
@@ -154,11 +217,20 @@ export default function UploadForm() {
     {/* Section for selecting the collection */}
     <div className={styles["collection-list"]}>
       <p>Choose a Collection</p>
-      <input type="text" name="collectionName" className={styles["text-input"]} placeholder="Search collection or enter collection to create" />
+      <input
+        type="text"
+        name="collectionName"
+        className={styles["text-input"]}
+        placeholder="Search collection or enter collection to create"
+        onChange={handleCollectionNameChange}/>
     </div>
 
 
-    <button className={`btn btn-primary btn-lg btn-block ${styles["upload-button"]}`}>Upload</button>
+    <input
+      type="submit"
+      className={`btn btn-primary btn-lg btn-block ${styles["upload-button"]}`}
+      value={"Upload"}
+    />
     </form>
   );
 }

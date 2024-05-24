@@ -12,3 +12,15 @@
   margin: 0;
   padding: 0;
 }
+
+
+/* Global classes */
+.centerContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.background-default {
+  background: linear-gradient(to right, #74ebd5, #ACB6E5);
+}
