@@ -1,5 +1,6 @@
-// src/Log.tsx
-import React from 'react';
+"use client";
+import React, { FormEvent } from 'react';
+import { useRouter } from 'next/navigation';
 
 
 
@@ -22,25 +23,55 @@ const AuthForm: React.FC<AuthFormProps> = ({
   switchText,
   switchLinkText,
 }) => {
+  const router = useRouter();
+  async function handleOnSubmit(event: FormEvent) {
+    let route = "";
+    if (formType === "login") {
+      route = "/api/login";
+    } else {
+      route = "/api/register";
+    }
+    event.preventDefault();
+    const formData = new FormData(event.target as HTMLFormElement);
+    const resp = await fetch(route, {
+      method: "POST",
+      body: formData
+    })
+    const result = await resp.json();
+    if (resp.ok) {
+      if (formType === "login") {
+        router.push("/dashboard");
+      }
+      else {
+        alert('User created. Proceed to log in');  // Login after registration
+        toggleForm();
+      }
+    }
+    else {
+      alert(result.message);
+    }
+  }
+
+
   return (
     <div className="form-container">
       <div className="form-header">
         <h2>{title}</h2>
         <p>{subtitle}</p>
       </div>
-      <form>
+      <form onSubmit={handleOnSubmit}>
         <div className="input-group">
           <label htmlFor={`${formType}-email`}>Email</label>
-          <input type="email" id={`${formType}-email`} required />
+          <input name="email" type="email" id={`${formType}-email`} required />
         </div>
         <div className="input-group">
           <label htmlFor={`${formType}-password`}>Password</label>
-          <input type="password" id={`${formType}-password`} required />
+          <input name="password" type="password" id={`${formType}-password`} required />
         </div>
         {formType === 'register' && (
           <div className="input-group">
             <label htmlFor="register-confirm-password">Confirm Password</label>
-            <input type="password" id="register-confirm-password" required />
+            <input name="password" type="password" id="register-confirm-password" required />
           </div>
         )}
         <button type="submit" className="btn">{buttonText}</button>

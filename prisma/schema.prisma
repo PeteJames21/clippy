@@ -17,6 +17,7 @@ model User {
   id       Int    @id @default(autoincrement())
   email    String @unique @db.VarChar(255)
   password String
+  TextItems TextItem[]
 }
 
 model Collection {
@@ -34,6 +35,8 @@ model TextItem {
   tags         String?    @db.VarChar(100)
   collection   Collection @relation(fields: [collectionId], references: [id])
   collectionId Int
+  userID       Int
+  user         User       @relation(fields: [userID], references: [id])
 
   @@index([content(length: 300), description(length: 250), tags], name: "fulltext_index")
 }
