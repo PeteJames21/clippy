@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
 import { getUserFromSession } from "@/app/lib/auth";
+import { PrismaClient } from "@prisma/client";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
   const user = await getUserFromSession(req);
@@ -10,8 +10,12 @@ export async function GET(req: NextRequest) {
 
   const prisma = new PrismaClient();
   try {
-    const collections = await prisma.collection.findMany();
-    return NextResponse.json(JSON.stringify(collections), {status: 200});
+    const items = await prisma.textItem.findMany({
+      where: {
+        userID: user.id
+      }
+    });
+    return NextResponse.json(JSON.stringify(items), {status: 200});
   }
   catch(error) {
     return NextResponse.json({message: error.message}, {status: 500});

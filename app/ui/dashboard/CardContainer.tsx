@@ -1,14 +1,34 @@
-'use client'
-import React from 'react';
+'use client';
+import React, { useEffect, useState } from 'react';
 import Card from './Card';
-import { items_list2 } from "@/app/lib/data";
 import './CardContainerStyles.css'; // Import the CSS file
 
-const CardContainer: React.FC = () => {
+export default function CardContainer() {
+  const [items, setItems] = useState([]);
+
+  async function fetchItemList() {
+    console.log("calling func");
+    const resp = await fetch("/api/item");
+    if (resp.ok) {
+      const res = await resp.json();
+      setItems(JSON.parse(res));
+    }
+    else {
+      // TODO: Render error message in container
+    }
+  }
+
+  // Fetch collections from the db.
+  useEffect(
+    () => {
+      fetchItemList();
+    }, []
+  );
+
   return (
     <div>
       <div className="CardContainer">
-        {items_list2.map((item) => (
+        {items.map((item) => (
           <Card
             key={item.id}
             id={item.id}
@@ -16,7 +36,7 @@ const CardContainer: React.FC = () => {
             bodyContent={item.content}
             footerContent={{
               tags: item.tags,
-              collection: item.collection.name
+              collection: item.collectionId
             }}
           />
         ))}
@@ -24,5 +44,3 @@ const CardContainer: React.FC = () => {
     </div>
   );
 };
-
-export default CardContainer;

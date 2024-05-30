@@ -43,7 +43,7 @@ const Card: React.FC<CardProps> = ({ id, title, bodyContent, footerContent }) =>
       </div>
       <div className="card-footer">
         <div>Tags: {footerContent.tags}</div>
-        <div>Collection: {footerContent.collection}</div>
+        {/* <div>Collection: {footerContent.collection}</div> */}
       </div>
     </div>
   );

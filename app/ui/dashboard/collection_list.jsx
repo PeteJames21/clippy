@@ -1,22 +1,19 @@
 "use client";
 
 import styles from './dashboard.module.css';
-import {collections} from '../../lib/data';
 import {useEffect, useState} from 'react';
 
 export default function CollectionBox({repo}) {
-  const itemsList = collections;  // Replace with async fetch
-  const [items, setItems] = useState(itemsList);
+  const [items, setItems] = useState([]);
 
   async function fetchCollectionList() {
     const resp = await fetch("/api/collection");
     if (resp.ok) {
       const res = await resp.json();
       setItems(JSON.parse(res));
-      console.log(res);
     }
     else {
-      // Renderr error message in box
+      // TODO: Render error message in box
     }
   }
 
@@ -24,7 +21,6 @@ export default function CollectionBox({repo}) {
   useEffect(
     () => {
       fetchCollectionList();
-      console.log("fetched collections")
     }, []
   );
   return (
