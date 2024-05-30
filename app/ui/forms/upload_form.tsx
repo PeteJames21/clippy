@@ -2,12 +2,14 @@
 import Image from "next/image";
 import TagListItem from "./TagListItem";
 import styles from "./forms.module.css";
-import { useState, useRef, useEffect, FormEventHandler, ChangeEvent } from "react";
+import { useState, useRef, useEffect, ChangeEvent } from "react";
 import React from "react";
 import { MouseEvent } from "react";
 import { v4 as uuidv4 } from 'uuid';
+import { useRouter } from "next/navigation";
 
 export default function UploadForm() {
+  const router = useRouter();
   const [textUploadSectionVisible, toggleTextUploadSectionVisibility] = useState(1);
   const [imageUploadSectionVisible, toggleImageUploadSectionVisibility] = useState(0);
   const [tags, setTags] = useState([]);
@@ -98,16 +100,28 @@ export default function UploadForm() {
     data.current.collectionName = event.target.value;
   }
 
-  function handleOnSubmit(event: SubmitEvent) {
+  async function handleOnSubmit(event: SubmitEvent) {
     event.preventDefault();
     formModified.current = false
     // TODO: add validation functions here
     const uploadData = {
       ...data.current,
     }
-    alert('submitted');
-    console.log(uploadData);
-    console.log('submitted');
+    const resp = await fetch("/api/upload", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(uploadData)
+    })
+
+    if (resp.ok) {
+      router.push("/dashboard");
+    }
+    else {
+      const res = await resp.json();
+      alert(`An unexpected error occured: ${res.message}`)
+    }
   }
 
   useEffect(
@@ -135,6 +149,17 @@ export default function UploadForm() {
       document.querySelector('form').addEventListener('submit', handleOnSubmit)
     }, []
   )
+
+  // Prevent form from being submitted when enter key is pressed
+  useEffect(
+    () => {
+      document.getElementById('input-collection-name').addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Prevent form submission
+        }
+    });
+    }, []
+  );
   return (
     <form action="" id="upload-form" className={styles.upload_form}>
       <p className="h3 text-center">Upload a New Item</p>
@@ -161,6 +186,7 @@ export default function UploadForm() {
         <p className="h5">Create a Text Item</p>
         <textarea className={styles.textArea}
           id="textItemContent" name="textItemContent"
+          required
           placeholder="Enter text here..."
           onChange={handleTextAreaChange}>
 
@@ -185,7 +211,7 @@ export default function UploadForm() {
         <input type="text" name="imgURL" className={styles["text-input"]} placeholder="Paste image link" />
       </div>
 
-    {/* Section for providing ttem Description */}
+    {/* Section for providing item Description */}
     <div>
       <p className="h5">Item description (e.g. purpose, sources, etc.)</p>
       <textarea className={`${styles.textArea} ${styles["item-description"]}`}
@@ -220,8 +246,10 @@ export default function UploadForm() {
     <div className={styles["collection-list"]}>
       <p className="h5">Choose a Collection</p>
       <input
+        id="input-collection-name"
         type="text"
         name="collectionName"
+        required
         className={styles["text-input"]}
         placeholder="Search collection or enter collection to create"
         onChange={handleCollectionNameChange}/>

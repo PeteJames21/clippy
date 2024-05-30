@@ -23,7 +23,7 @@ export async function getSession(req: NextRequest) {
 export async function getUserFromSession(req: NextRequest): Promise<SessionUser> {
   const session = await getSession(req);
   if (session) {
-    const user: SessionUser = JSON.parse(session.value).user;
+    const user: SessionUser = session.user;
     return user;
   }
   else {

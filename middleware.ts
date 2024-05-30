@@ -12,7 +12,7 @@ export function middleware(req: NextRequest) {
   res.cookies.set(
     "session",
     sessionValue,
-    {httpOnly: true, expires: t},
+    {httpOnly: true, expires: t, sameSite: "strict"},
   );
   return res;
 }
