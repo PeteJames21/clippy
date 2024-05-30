@@ -27,7 +27,9 @@ export default function CollectionBox({repo}) {
     <div className={styles["collection-box"]}>
       <span className="h5">{repo}</span>
       <div className={styles["collection-list"]}>
-        {items.map((obj, index) => (
+        {items.sort(
+          (a, b) => a.name.localeCompare(b.name)
+        ).map((obj, index) => (
           <CollectionItem key={obj.id} item={obj} />
         ))}
       </div>

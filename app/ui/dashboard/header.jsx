@@ -12,9 +12,9 @@ export default function Header() {
       <div className={styles.searchContainer}>
         <input type="text" id="searchInput" className={styles.searchContent} placeholder="Search for content..." />
       </div>
-      <div className={styles.avatarContainer}>
+      {/* <div className={styles.avatarContainer}>
         <Image src='/avatar.jpg' alt="Avatar" className={styles.avatar} width={50} height={50} />
-      </div>
+      </div> */}
       <UserNameDiv />
       <LogoutButton />
     </nav>
