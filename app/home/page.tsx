@@ -7,7 +7,7 @@ import './styles.css';  // Assuming you have the same CSS
 const App: React.FC = () => {
     return (
         <div>
-            <NavBar />
+            <NavBar /> {/* Might need to use the already created navbar component */}
             <Content />
         </div>
     );
