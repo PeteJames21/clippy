@@ -2,15 +2,34 @@
 
 import styles from './dashboard.module.css';
 import {collections} from '../../lib/data';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 
 export default function CollectionBox({repo}) {
   const itemsList = collections;  // Replace with async fetch
   const [items, setItems] = useState(itemsList);
 
+  async function fetchCollectionList() {
+    const resp = await fetch("/api/collection");
+    if (resp.ok) {
+      const res = await resp.json();
+      setItems(JSON.parse(res));
+      console.log(res);
+    }
+    else {
+      // Renderr error message in box
+    }
+  }
+
+  // Fetch collections from the db.
+  useEffect(
+    () => {
+      fetchCollectionList();
+      console.log("fetched collections")
+    }, []
+  );
   return (
     <div className={styles["collection-box"]}>
-      <span>{repo}</span>
+      <span className="h5">{repo}</span>
       <div className={styles["collection-list"]}>
         {items.map((obj, index) => (
           <CollectionItem key={obj.id} item={obj} />
@@ -23,9 +42,9 @@ export default function CollectionBox({repo}) {
 function CollectionItem({ item }) {
   return (
     <div className={styles["collection-item"]}>
-      <img src={item.imgURL} width={20} height={20} />
-      <span>{item.title}</span>
-      <CounterBadge n_items={item.n_items}/>
+      <img src={item.imgPath? item.imgPath: "/icons/code.png"} width={20} height={20} />
+      <span>{item.name}</span>
+      {/* <CounterBadge n_items={1}/> */}
     </div>
   );
 }

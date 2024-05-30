@@ -8,8 +8,7 @@ export default function SideNav() {
       <Link href="/upload">
       <button className="btn btn-primary btn-lg btn-block">+ Add Item</button>
       </Link>
-      <CollectionBox repo="Public Collection"/>
-      <CollectionBox repo="Private Collection"/>
+      <CollectionBox repo="My Code Collections"/>
     </div>
   );
 }
