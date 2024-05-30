@@ -1,6 +1,7 @@
 import styles from './dashboard.module.css';
 import Image from "next/image"
-
+import LogoutButton from './logout_button';
+import UserNameDiv from './user_name';
 
 export default function Header() {
   return (
@@ -14,6 +15,8 @@ export default function Header() {
       <div className={styles.avatarContainer}>
         <Image src='/avatar.jpg' alt="Avatar" className={styles.avatar} width={50} height={50} />
       </div>
+      <UserNameDiv />
+      <LogoutButton />
     </nav>
   );
 }

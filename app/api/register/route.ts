@@ -10,14 +10,28 @@ export async function POST(req: NextRequest, res: NextResponse) {
     const password = formData.get('password').toString();
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const user = await prisma.user.create({
-      data: {
-        email: email,
-        password: hashedPassword
+    // Check if email is already in use
+    const result = await prisma.user.findUnique({
+      where: {
+        email: email
       }
-    });
+    })
+    if (result) {
+      return NextResponse.json({message: "Email already in use"}, {status: 409});
+    }
 
-    return NextResponse.json(
-      {id: user.id}, {status: 200}
-    );
+    // Register the user
+    try {
+      const user = await prisma.user.create({
+        data: {
+          email: email,
+          password: hashedPassword
+        }
+      });
+      return NextResponse.json({id: user.id}, {status: 201});
+    }
+    catch(error) {
+      const message = "An unexpected error occured. Please try again";
+      return NextResponse.json({message}, {status: 500});
+    }
   }

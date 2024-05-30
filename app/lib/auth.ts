@@ -1,22 +1,41 @@
-import { cookies } from "next/headers";
-import { User } from "@prisma/client";
+import { NextRequest } from "next/server";
 
-
-export async function getSession() {
-  const session = cookies().get("session");
-  if (!session)
-    return null;
-  return session;
+type SessionUser = {
+  email: string,
+  id: number
 }
 
-export async function addUserToSession(user: User) {
-  const session = cookies().get("session");
-  if (session)
-    throw new Error("A session already exists. Log out first");
+/**
+ * Return the session as an object
+ */
+export async function getSession(req: NextRequest) {
+  const session = req.cookies.get("session");
+  if (!session || !session.value) {
+    return null;
+  }
+  return JSON.parse(session.value);
+}
 
-  const sessionValue = {user: {email: user.email, id: user.id}};
-  // Get cookie lifetime in milliseconds
+
+/**
+ * Get user from the session. Note that the password field is excluded
+ */
+export async function getUserFromSession(req: NextRequest): Promise<SessionUser> {
+  const session = await getSession(req);
+  if (session) {
+    const user: SessionUser = JSON.parse(session.value).user;
+    return user;
+  }
+  else {
+    return null;
+  }
+}
+
+/**
+ * Refresh the session expiration date and return it.
+ */
+export function getSessionExpiration() {
   const t = parseInt(process.env.SESSION_EXPIRES, 10) * 3600 * 1000;
   const expires = new Date(Date.now() + t);
-  cookies().set("session", JSON.stringify(sessionValue), {expires, httpOnly: true});
+  return expires;
 }
