@@ -2,9 +2,9 @@
 import React from 'react';
 import Card from './Card';
 import { items_list2 } from "@/app/lib/data";
-import './styles.css'; // Import the CSS file
+import './CardContainerStyles.css'; // Import the CSS file
 
-const App: React.FC = () => {
+const CardContainer: React.FC = () => {
   return (
     <div>
       <div className="CardContainer">
@@ -25,4 +25,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default CardContainer;
