@@ -11,7 +11,12 @@ export default function LogoutButton() {
         method: "POST",
         body: new FormData()
       })
-      console.log("result", result);
+      if (result.ok) {
+        router.refresh();
+      }
+      else {
+        alert('An unepected error occured during logout. Please try again')
+      }
   };
 
   return (

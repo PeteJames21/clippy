@@ -50,6 +50,10 @@ const AuthForm: React.FC<AuthFormProps> = ({
     else {
       alert(result.message);
     }
+    // The login form does not reditect the user to the dashboard if they try
+    // to login in again immediately after loggin out. Refreshing the login page
+    // makes the redirect work.
+    router.refresh();
   }
 
 
