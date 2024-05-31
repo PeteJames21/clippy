@@ -1,7 +1,9 @@
 "use client";
 
+import Link from 'next/link';
 import styles from './dashboard.module.css';
 import {useEffect, useState} from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 
 export default function CollectionBox({repo}) {
   const [items, setItems] = useState([]);
@@ -25,7 +27,7 @@ export default function CollectionBox({repo}) {
   );
   return (
     <div className={styles["collection-box"]}>
-      <span className="h5">{repo}</span>
+      <span className="h5 text-center">{repo}</span>
       <div className={styles["collection-list"]}>
         {items.sort(
           (a, b) => a.name.localeCompare(b.name)
@@ -38,12 +40,15 @@ export default function CollectionBox({repo}) {
 }
 
 function CollectionItem({ item }) {
+  const path = usePathname();
   return (
-    <div className={styles["collection-item"]}>
-      <img src={item.imgPath? item.imgPath: "/icons/code.png"} width={20} height={20} />
-      <span>{item.name}</span>
-      {/* <CounterBadge n_items={1}/> */}
-    </div>
+    <Link href={`${path}?collectionId=${item.id}`} className="link-primary">
+      <div className={styles["collection-item"]}>
+        <img src={item.imgPath? item.imgPath: "/icons/code.png"} width={20} height={20} />
+        <span>{item.name}</span>
+        {/* <CounterBadge n_items={1}/> */}
+      </div>
+    </Link>
   );
 }
 

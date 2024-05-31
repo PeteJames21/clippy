@@ -1,5 +1,5 @@
 import { getUserFromSession } from "@/app/lib/auth";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, TextItem } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
@@ -9,15 +9,33 @@ export async function GET(req: NextRequest) {
   }
 
   const prisma = new PrismaClient();
+  const params = req.nextUrl.searchParams;
+  const collectionId = Number(params.get("collectionId"));
   try {
-    const items = await prisma.textItem.findMany({
-      where: {
-        userID: user.id
-      }
-    });
+    let items: TextItem[];
+    if (collectionId){
+      // From the specified collection, get all items belonging to the
+      // user and items from other users marked as public.
+      items = await prisma.textItem.findMany({
+        where: {
+          collectionId,
+          OR: [
+            {userID: user.id}, {public: true}
+          ]
+        }
+      });
+    }
+    else {
+      // Return all items from the database belonging to the user
+      items = await prisma.textItem.findMany({
+        where: {
+          userID: user.id
+        }
+      });
+    }
     return NextResponse.json(JSON.stringify(items), {status: 200});
   }
   catch(error) {
     return NextResponse.json({message: error.message}, {status: 500});
-  }
+    }
 }

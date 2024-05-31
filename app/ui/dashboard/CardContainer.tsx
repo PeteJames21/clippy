@@ -2,13 +2,16 @@
 import React, { useEffect, useState } from 'react';
 import Card from './Card';
 import './CardContainerStyles.css'; // Import the CSS file
+import { usePathname, useSearchParams } from 'next/navigation';
 
 export default function CardContainer() {
   const [items, setItems] = useState([]);
+  const params = useSearchParams();
 
   async function fetchItemList() {
-    console.log("calling func");
-    const resp = await fetch("/api/item");
+    // Fetch items using query params as the filter.
+    // All items are returned if no params are specified.
+    const resp = await fetch(`/api/item?${params.toString()}`);
     if (resp.ok) {
       const res = await resp.json();
       setItems(JSON.parse(res));
@@ -22,7 +25,7 @@ export default function CardContainer() {
   useEffect(
     () => {
       fetchItemList();
-    }, []
+    }, [params]
   );
 
   return (
