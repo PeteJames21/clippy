@@ -1,7 +1,6 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import Card from './Card';
-import './CardContainerStyles.css'; // Import the CSS file
 import { usePathname, useSearchParams } from 'next/navigation';
 import styles from "@/app/ui/dashboard/dashboard.module.css";
 

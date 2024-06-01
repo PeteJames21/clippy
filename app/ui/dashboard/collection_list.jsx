@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import styles from './dashboard.module.css';
 import {useEffect, useState} from 'react';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 export default function CollectionBox({repo}) {
   const [items, setItems] = useState([]);

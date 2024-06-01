@@ -26,10 +26,14 @@ CREATE TABLE `TextItem` (
     `description` VARCHAR(1000) NOT NULL,
     `tags` VARCHAR(100) NULL,
     `collectionId` INTEGER NOT NULL,
+    `userID` INTEGER NOT NULL,
 
-    INDEX `fulltext_index`(`content`(300), `description`(250), `tags`),
+    FULLTEXT INDEX `TextItem_content_description_tags_idx`(`content`, `description`, `tags`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- AddForeignKey
 ALTER TABLE `TextItem` ADD CONSTRAINT `TextItem_collectionId_fkey` FOREIGN KEY (`collectionId`) REFERENCES `Collection`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `TextItem` ADD CONSTRAINT `TextItem_userID_fkey` FOREIGN KEY (`userID`) REFERENCES `User`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
