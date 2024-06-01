@@ -1,6 +1,7 @@
 "use client";
 import React, { FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
+import styles from "@/app/ui/forms/login.module.css"
 
 
 
@@ -58,28 +59,28 @@ const AuthForm: React.FC<AuthFormProps> = ({
 
 
   return (
-    <div className="form-container">
-      <div className="form-header">
+    <div className={styles["form-container"]}>
+      <div className={styles["form-header"]}>
         <h2>{title}</h2>
         <p>{subtitle}</p>
       </div>
       <form onSubmit={handleOnSubmit}>
-        <div className="input-group">
+        <div className={styles["input-group"]}>
           <label htmlFor={`${formType}-email`}>Email</label>
           <input name="email" type="email" id={`${formType}-email`} required />
         </div>
-        <div className="input-group">
+        <div className={styles["input-group"]}>
           <label htmlFor={`${formType}-password`}>Password</label>
           <input name="password" type="password" id={`${formType}-password`} required />
         </div>
         {formType === 'register' && (
-          <div className="input-group">
+          <div className={styles["input-group"]}>
             <label htmlFor="register-confirm-password">Confirm Password</label>
             <input name="password" type="password" id="register-confirm-password" required />
           </div>
         )}
-        <button type="submit" className="btn">{buttonText}</button>
-        <p className="switch-form">
+        <button type="submit" className={styles.btn}>{buttonText}</button>
+        <p className={styles["switch-form"]}>
           {switchText} <a href="#" onClick={toggleForm}>{switchLinkText}</a>
         </p>
       </form>

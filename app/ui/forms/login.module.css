@@ -1,5 +1,5 @@
 /* src/App.css */
-body {
+.body {
   font-family: 'Arial', sans-serif;
   background: linear-gradient(to right, #74ebd5, #ACB6E5);
   display: flex;

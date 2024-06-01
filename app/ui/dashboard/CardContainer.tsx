@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Card from './Card';
 import './CardContainerStyles.css'; // Import the CSS file
 import { usePathname, useSearchParams } from 'next/navigation';
+import styles from "@/app/ui/dashboard/dashboard.module.css";
 
 export default function CardContainer() {
   const [items, setItems] = useState([]);
@@ -30,7 +31,7 @@ export default function CardContainer() {
 
   return (
     <div>
-      <div className="CardContainer">
+      <div className={styles.cardContainer}>
         {items.map((item) => (
           <Card
             key={item.id}

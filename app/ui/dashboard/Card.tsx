@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Card.css';
+import styles from "@/app/ui/dashboard/card.module.css";
 
 interface CardProps {
   id: number;
@@ -33,15 +33,15 @@ const Card: React.FC<CardProps> = ({ id, title, bodyContent, footerContent }) =>
   const trimmedBodyContent = typeof bodyContent === 'string' && bodyContent.length > 120 ? bodyContent.substring(0, 120) + "..." : bodyContent;
 
   return (
-    <div className="card" key={id} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-      <div className="card-header">
+    <div className={styles.card} key={id} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+      <div className={styles["card-header"]}>
         {title}
       </div>
-      <div className="card-body" onClick={handleCopy}>
+      <div className={styles["card-body"]} onClick={handleCopy}>
         {trimmedBodyContent}
-        {tooltipText && <span className="tooltip">{tooltipText}</span>}
+        {tooltipText && <span className={styles["tooltip"]}>{tooltipText}</span>}
       </div>
-      <div className="card-footer">
+      <div className={styles["card-footer"]}>
         <div>Tags: {footerContent.tags}</div>
         {/* <div>Collection: {footerContent.collection}</div> */}
       </div>

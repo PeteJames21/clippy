@@ -7,7 +7,7 @@ export default function Page() {
   if (!session) {
     return redirect("/login");
   }
-  
+
   return (
     <div className="container-center background-default">
       <UploadForm />

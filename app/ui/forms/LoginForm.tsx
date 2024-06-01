@@ -1,7 +1,7 @@
-"use client"
+"use client";
 import React, {useState} from 'react'
 import AuthForm from "@/app/ui/forms/Login";
-import "@/app/ui/forms/Login.css";
+import styles from "@/app/ui/forms/login.module.css";
 
 
 const LoginForm: React.FC = () => {
@@ -12,7 +12,7 @@ const LoginForm: React.FC = () => {
   };
 
   return (
-    <div className="container container-center">
+    <div className={`${styles.container} container-center`}>
       {isLogin ? (
         <AuthForm
           formType="login"
