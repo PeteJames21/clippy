@@ -164,26 +164,29 @@ export default function UploadForm() {
     <form action="" id="upload-form" className={styles.upload_form}>
       <p className="h3 text-center">Upload a New Item</p>
       <div>
+        <div className="h5">Item visibility</div>
         <div className={styles["radioGroup"]}>
-          <div>Item visibility</div>
           <input type="radio" name="visibility" value="private" id="private" onChange={handleVisibilityChange}/>
           <label htmlFor="private">Private</label>
           <input type="radio" name="visibility" value="public" id="public" defaultChecked onChange={handleVisibilityChange}/>
           <label htmlFor="public">Public</label>
         </div>
+      </div>
 
-        <div className={styles["radioGroup"]}>
-          <div>Upload type</div>
-          <input type="radio" name="itemType" value="image" id="image" onChange={handleTypeChange}/>
-          <label htmlFor="image">Image</label>
-          <input type="radio" name="itemType" value="text" id="text" defaultChecked onChange={handleTypeChange} />
-          <label htmlFor="text">Text</label>
-        </div>
+      {/* Hidden until the image upload feature is implemented */}
+      <div className={styles.hidden}>
+        <div className="h5">Upload type</div>
+          <div className={styles["radioGroup"]}>
+            <input type="radio" name="itemType" value="image" id="image" onChange={handleTypeChange}/>
+            <label htmlFor="image">Image</label>
+            <input type="radio" name="itemType" value="text" id="text" defaultChecked onChange={handleTypeChange} />
+            <label htmlFor="text">Text</label>
+          </div>
       </div>
 
     {/* Section for uploading text */}
       <div className={textUploadSectionVisible? "": styles.hidden}>
-        <p className="h5">Create a Text Item</p>
+        <p className="h5">Item Content</p>
         <textarea className={styles.textArea}
           id="textItemContent" name="textItemContent"
           required
