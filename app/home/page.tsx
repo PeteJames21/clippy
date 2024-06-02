@@ -10,9 +10,21 @@ import Footer from '../ui/landing/Footer';
 import './global.css';   // Assuming you have the same CSS
 
 const App: React.FC = () => {
+    const scrollToAbout = () => {
+        const aboutSection = document.getElementById('about');
+        if (aboutSection) {
+            aboutSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+    const scrollToAuthors = () => {
+        const authorsSection = document.getElementById('project-authors');
+        if (authorsSection) {
+            authorsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
     return (
         <div>
-            <NavBar /> {/* Might need to use the already created navbar component */}
+            <NavBar scrollToAbout={scrollToAbout} scrollToAuthors={scrollToAuthors}/> {/* Might need to use the already created navbar component */}
             <Content />
             <AboutUs />
             <ProjectScreenshots />

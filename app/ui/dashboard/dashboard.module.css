@@ -1,5 +1,4 @@
 .header {
-  background-color: rgb(0, 10, 10);
   color: #ffffff;
   height: var(--header-height);
   border-bottom: 1px solid var(--color-outline);
@@ -8,6 +7,12 @@
   justify-content:space-around;
   align-items: center;
   padding: 10px;
+  background-color: aqua;
+  /* background-color: #8EC5FC;
+background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%); */
+background-image: linear-gradient( 89.5deg,  rgba(131,204,255,1) 0.4%, rgba(66,144,251,1) 100.3% );
+
+
 }
 .logoContainer {
   margin-right: 20px;
