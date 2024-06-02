@@ -1,0 +1,26 @@
+.screenshotContainer {
+  display: flex;
+  justify-content: space-around;
+  padding: 50px;
+  background-color: #e9ecef;
+}
+
+.screenshot {
+  width: 30%;
+  text-align: center;
+}
+
+.imageScreenshot {
+  width: 100%;
+  height: 200px; /* Set the desired height */
+  border-radius: 5px;
+  background-size: cover;
+  background-repeat: no-repeat;
+ /*  background-color: #141f1e; */
+}
+
+.description {
+  margin-top: 10px;
+  font-size: 1em;
+  color: #333;
+}

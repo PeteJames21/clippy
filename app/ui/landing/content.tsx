@@ -1,18 +1,22 @@
+/* Content.tsx */
 import React from 'react';
 import useChangingHeading from './useChangingHeading';
+import styles from './landing.module.css';
 
 const Content: React.FC = () => {
     const changingHeadingRef = useChangingHeading();
 
     return (
-        <div className="container">
-            <div className="text-content">
-                <h1><span ref={changingHeadingRef} id="changing-heading">Get More Done</span> </h1>
-                <h1>Just Clip It</h1>
-                <p>A simpler way to do the things you do.</p>
-                <button className="cta">Get Started</button>
+        <div className={styles.container}>
+            <div className={styles.textContent}>
+                <h1 className={styles.changingHead}>
+                    <span ref={changingHeadingRef} className={styles.changingHeading}>Get More Done</span>
+                </h1>
+                <h1 className={styles.changingHead}>Just Clip It</h1>
+                <p className={styles.catchPhrase}>A simpler way to do the things you do.</p>
+                <button className={styles.cta}>Get Started</button>
             </div>
-            <div className="image-content"></div>
+            <div className={styles.imageContent}></div>
         </div>
     );
 };

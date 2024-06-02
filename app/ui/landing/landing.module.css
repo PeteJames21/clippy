@@ -1,0 +1,139 @@
+
+
+.navbar {
+  width: 100%;
+  background: rgba(23, 34, 50, 0.5);
+  padding: 10px 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  margin: 0 auto;
+  padding: 0;
+  width: 70%;
+  /* background-color: antiquewhite; */
+}
+
+.navbar ul li {
+  margin: 0 15px;
+}
+
+.navbar ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1em;
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 50px 70px;
+  margin-top: 0px ; /* Adjust for navbar height */
+ /*  margin-bottom: 40px; */
+
+  background: url('../../../public/landing-bg.png') center/cover no-repeat;
+}
+
+.text-content {
+  min-width: 70%;
+  color: #ffffff;
+  /* background-color: #141f1e;  */
+
+}
+
+.changingHead {
+  font-size: 4em;
+  margin-bottom: 20px;
+  font-weight: bolder;
+}
+
+.catchPhrase {
+  font-size: 1.8em;
+  margin-bottom: 30px;
+}
+
+#changing-heading {
+  display: inline-block;
+  transition: opacity 0.5s ease-in-out;
+}
+.cta {
+  font-size: 1.3em;
+  padding: 10px 20px;
+  color: #141f1e;
+  font-weight: bold;
+  background-color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cta:hover {
+  background-color: #74ebd5;
+  color: #fff;
+}
+
+
+
+/* ABOUT US */
+.aboutContainer {
+  margin-top: 60px 0px;
+  display: flex;
+  padding: 50px 50px 70px;
+
+}
+
+.title {
+  width: 40%;
+  display: flex;
+  align-items:flex-start;
+  justify-content: center;
+}
+.title h2{
+
+  font-size: 4em;
+  margin-bottom: 20px;
+  font-weight: bolder;
+
+}
+
+.descriptionAbout {
+  width: 60%;
+  padding-left: 20px;
+  font-size: 1.2em;
+  line-height: 1.6;
+}
+
+/* SCREENSHOTS */
+.screenshotContainer {
+  display: flex;
+  justify-content: space-around;
+  padding: 50px;
+  background-color: #e9ecef;
+}
+
+.screenshot {
+  width: 30%;
+  text-align: center;
+}
+
+.imageScreenshot {
+  width: 100%;
+  height: 200px; /* Set the desired height */
+  border-radius: 5px;
+  background-size: cover;
+  background-repeat: no-repeat;
+ /*  background-color: #141f1e; */
+}
+
+.description {
+  margin-top: 10px;
+  font-size: 1em;
+  color: #333;
+}
