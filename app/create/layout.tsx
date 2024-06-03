@@ -1,8 +1,7 @@
-import UploadForm from "@/app/ui/forms/upload_form";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-export default function Page() {
+export default function Page({children}: {children: React.ReactNode}) {
   const session = cookies().get("session")?.value;
   if (!session) {
     return redirect("/login");
@@ -10,7 +9,7 @@ export default function Page() {
 
   return (
     <div className="container-center background-default">
-      <UploadForm />
+      { children }
     </div>
   );
 }

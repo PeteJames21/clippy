@@ -12,95 +12,95 @@
 }
 
 .fileUploadSection {
-display: flex;
-flex-direction: column;
-padding: 10px;
-border: 1px solid black;
-width: fit-content;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border: 1px solid black;
+  width: fit-content;
 }
 
 .dropZone {
-display: flex;
-flex-direction: row;
-align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .divider {
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .dividerText {
-margin-left: 10px;
-margin-right: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .dropImage {
-margin-right: 10px;
+  margin-right: 10px;
 }
 
 .dotted-line {
-border-top: 3px dotted black;
-width: 100%;
+  border-top: 3px dotted black;
+  width: 100%;
 }
 
 .text-input {
-width: 400px;
-padding: 10px 10px 10px 20px;
-border: 1px solid black;
-border-radius: 20px;
+  width: 400px;
+  padding: 10px 10px 10px 20px;
+  border: 1px solid black;
+  border-radius: 20px;
 }
 
 .upload_form {
-display: flex;
-flex-direction: column;
-margin: 10px;
-width: fit-content;
-border: 1px solid black;
-border-radius: 10px;
-padding: 20px;
-gap: 10px;
-color: black;
-background-color: white;
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  width: fit-content;
+  border: 1px solid black;
+  border-radius: 30px;
+  padding: 30px;
+  gap: 10px;
+  color: black;
+  background-color: white;
 }
 
 .tagSelectionArea {
-display: flex;
-flex-direction: column;
-gap: 10px;
-width: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: inherit;
 }
 
 .tag-list {
-display: flex;
-flex-direction: row;
-flex-wrap: wrap;
-gap: 5px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 5px;
 }
 
 .tag-list-item {
-display: flex;
-flex-direction: row;
-background-color: #96b8da;
-border-radius: 20px;
-padding: 10px;
-gap: 5px;
+  display: flex;
+  flex-direction: row;
+  background-color: #96b8da;
+  border-radius: 20px;
+  padding: 10px;
+  gap: 5px;
 }
 
 .trash-icon {
-cursor: pointer;
-align-self: center;
+  cursor: pointer;
+  align-self: center;
 }
 
 .item-description {
-height: 150px;
+  height: 150px;
 }
 
 .upload-button {
-width: 30%;
-align-self: center;
+  width: 30%;
+  align-self: center;
 }
 
 .hidden {

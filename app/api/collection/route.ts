@@ -1,16 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import { getUserFromSession } from "@/app/lib/auth";
+import { getAllCollections } from "@/app/lib/db";
 
 export async function GET(req: NextRequest) {
   const user = await getUserFromSession(req);
-  if (user === null) {
-    return NextResponse.json({message: "No user credentials found"}, {status: 401});
-  }
-
   const prisma = new PrismaClient();
   try {
-    const collections = await prisma.collection.findMany();
+    const collections = await getAllCollections(user?.id);
     return NextResponse.json(JSON.stringify(collections), {status: 200});
   }
   catch(error) {

@@ -17,8 +17,13 @@
 /* Global classes */
 .container-center {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: safe center;
+  /* Not specifying "safe" causes upload form to be cut off at the top */
   align-items: center;
+  height: 100vh;
+  width: 100vw;
+  overflow: auto;
 }
 
 .background-default {

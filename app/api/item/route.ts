@@ -16,14 +16,6 @@ export async function GET(req: NextRequest) {
     let items: TextItem[];
     if (q) {
       items = await prisma.$queryRaw`SELECT * FROM TextItem WHERE (userID = ${user.id} OR public = true) AND MATCH (content, description, tags) AGAINST (${q} IN NATURAL LANGUAGE MODE);`
-      // items = await prisma.textItem.findMany({
-      //   where: {
-      //     OR: [{userID: user.id}, {public: true}],
-      //     tags: {
-      //       search: "python"
-      //     }
-      //   }
-      // })
     }
     else if (collectionId){
       // From the specified collection, get all items belonging to the

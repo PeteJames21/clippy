@@ -15,17 +15,22 @@ datasource db {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  email    String @unique @db.VarChar(255)
-  password String
-  TextItems TextItem[]
+  id        Int        @id @default(autoincrement())
+  email     String     @unique @db.VarChar(255)
+  password  String
+  textItems TextItem[]
+  collections Collection[]
 }
 
 model Collection {
-  id      Int        @id @default(autoincrement())
-  name    String     @unique @db.VarChar(30)
-  imgPath String?
-  items   TextItem[]
+  id          Int        @id @default(autoincrement())
+  name        String     @unique @db.VarChar(30)
+  description String?    @db.VarChar(150)
+  public      Boolean
+  imgPath     String?
+  userID      Int
+  user        User      @relation(fields: [userID], references: [id])
+  items       TextItem[]
 }
 
 model TextItem {
