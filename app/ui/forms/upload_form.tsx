@@ -1,60 +1,21 @@
 "use client";
-import Image from "next/image";
 import TagListItem from "./TagListItem";
 import styles from "./forms.module.css";
-import { useState, useRef, useEffect, ChangeEvent } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import React from "react";
 import { MouseEvent } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import { useRouter } from "next/navigation";
+import { TextItemProps } from "@/app/lib/types";
 
-export default function UploadForm() {
+export default function UploadForm({props} : {props: TextItemProps}) {
   const router = useRouter();
-  const [textUploadSectionVisible, toggleTextUploadSectionVisibility] = useState(1);
-  const [imageUploadSectionVisible, toggleImageUploadSectionVisibility] = useState(0);
   const [tags, setTags] = useState([]);
-  const [collection, setCollection] = useState("");
-  const formModified = useRef(false);
-
-  // Object for storing form data from all fields
-  const data = useRef(null);
-  if (data.current === null) {
-    data.current = {
-      visibility: "public",
-      itemType: "text",
-      imgURL: "",
-      description: "",
-      collectionName: "",
-      textItemContent: "",
-      tags: []
-    }
-}
-
-  function handleVisibilityChange(event: React.ChangeEvent) {
-    // Called when item visibility changes between public and private
-    data.current.visibility = event.target.getAttribute('value');
-  }
-
-  /**
-   * Toggle the visibility of the image/text upload sections
-   */
-  function handleTypeChange(event: React.ChangeEvent) {
-    const itemType = event.target.getAttribute('value');
-    data.current.itemType = itemType;
-    if (itemType === 'text') {
-      toggleImageUploadSectionVisibility(0);
-      toggleTextUploadSectionVisibility(1);
-    }
-    else {
-      toggleImageUploadSectionVisibility(1);
-      toggleTextUploadSectionVisibility(0);
-    }
-  }
 
   function handleTextAreaChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
     const value = event.target.value.trim();
     const target = event.target.getAttribute('name');
-    data.current = {...data.current, [target]: value};
+    props[target] = value;
   }
 
   function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
@@ -82,7 +43,7 @@ export default function UploadForm() {
       const tagValues = [...tags, newTag].map(
         item => item.value
       )
-      data.current.tags = tagValues;
+      props.tags = tagValues.join(",");
     }
   }
 
@@ -93,57 +54,36 @@ export default function UploadForm() {
     const itemId  = (event.target as HTMLElement).getAttribute('id');
     const newList = tags.filter(item => item.key !== itemId);
     setTags(newList);
+    props.tags = newList.join(",");
   }
 
   function handleCollectionNameChange(event: ChangeEvent<HTMLInputElement>) {
-    setCollection(event.target.value);
-    data.current.collectionName = event.target.value;
+    props.collectionName = event.target.value.trim();
   }
 
   async function handleOnSubmit(event: SubmitEvent) {
+    // concatenate tags into a string
     event.preventDefault();
-    formModified.current = false
     // TODO: add validation functions here
-    const uploadData = {
-      ...data.current,
-    }
-    const resp = await fetch("/api/upload", {
+    const resp = await fetch("/api/new/item", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(uploadData)
+      body: JSON.stringify(props)
     })
-
+    const res = await resp.json();
     if (resp.ok) {
+      // TODO: put the ID as a query param in dashboard so that the user
+      // can view the item after creating it
+      // const itemID = res.itemID;
       router.push("/dashboard");
     }
     else {
-      const res = await resp.json();
       alert(`An unexpected error occured: ${res.message}`)
     }
   }
 
-  useEffect(
-    () => {
-      // Warn the user of potential data loss when attempting to refresh the form
-      // or navigate away from it while it still has unsaved changes.
-      const formFields = document.querySelectorAll('input, textarea, select');
-      formFields.forEach(field => {
-        field.addEventListener("change", () => {
-            formModified.current = true;
-        });
-      });
-
-      window.addEventListener("beforeunload", function (e) {
-        if (formModified) {
-          e.preventDefault();
-        }
-      });
-    }, []
-  )
-
-  // Prevent default form behavior on submit
   useEffect(
     () => {
       document.querySelector('form').addEventListener('submit', handleOnSubmit)
@@ -160,65 +100,58 @@ export default function UploadForm() {
     });
     }, []
   );
+
+  // Initialize tags from props
+  useEffect(
+    () => {
+      if (props.tags) {
+        const values = props.tags.split(",");
+        const objs = values.map(
+          (value) => ({value, key: uuidv4()})
+        );
+        setTags(objs);
+      }
+    }, []
+  );
+
   return (
     <form action="" id="upload-form" className={styles.upload_form}>
       <p className="h3 text-center">Upload a New Item</p>
-      <div>
-        <div className="h5">Item visibility</div>
-        <div className={styles["radioGroup"]}>
-          <input type="radio" name="visibility" value="private" id="private" onChange={handleVisibilityChange}/>
-          <label htmlFor="private">Private</label>
-          <input type="radio" name="visibility" value="public" id="public" defaultChecked onChange={handleVisibilityChange}/>
-          <label htmlFor="public">Public</label>
-        </div>
-      </div>
 
-      {/* Hidden until the image upload feature is implemented */}
-      <div className={styles.hidden}>
-        <div className="h5">Upload type</div>
-          <div className={styles["radioGroup"]}>
-            <input type="radio" name="itemType" value="image" id="image" onChange={handleTypeChange}/>
-            <label htmlFor="image">Image</label>
-            <input type="radio" name="itemType" value="text" id="text" defaultChecked onChange={handleTypeChange} />
-            <label htmlFor="text">Text</label>
-          </div>
-      </div>
+    {/* Section for selecting the collection */}
+    <div className={styles["collection-list"]}>
+      <p className="h5">Choose a Collection</p>
+      <input
+        id="input-collection-name"
+        type="text"
+        name="collection"
+        defaultValue={props.collectionName}
+        required
+        className={styles["text-input"]}
+        placeholder="Enter collection name"
+        onChange={handleCollectionNameChange}/>
+    </div>
 
     {/* Section for uploading text */}
-      <div className={textUploadSectionVisible? "": styles.hidden}>
+      <div>
         <p className="h5">Item Content</p>
         <textarea className={styles.textArea}
-          id="textItemContent" name="textItemContent"
+          id="textItemContent" name="content"
           required
+          defaultValue={props.content}
           placeholder="Enter text here..."
           onChange={handleTextAreaChange}>
 
         </textarea>
       </div>
 
-      {/* Section for uploading a file */}
-      <div className={`${styles.fileUploadSection} ${imageUploadSectionVisible? "" : styles.hidden}`}>
-        <div className={styles.dropZone}>
-          <Image className={styles.dropImage} src="image-placeholder.svg" width={200} height={200} alt="Form image"/>
-          <div>
-            Drag an image here or <span id="file-upload-link">upload a file</span>
-          </div>
-        </div>
-
-        <div className={styles.divider}>
-          <div className={styles["dotted-line"]}></div>
-          <span className={styles.dividerText}>OR</span>
-          <div className={styles["dotted-line"]}></div>
-        </div>
-
-        <input type="text" name="imgURL" className={styles["text-input"]} placeholder="Paste image link" />
-      </div>
 
     {/* Section for providing item Description */}
     <div>
       <p className="h5">Item description (e.g. purpose, sources, etc.)</p>
       <textarea className={`${styles.textArea} ${styles["item-description"]}`}
         name="description" placeholder="Enter item description"
+        defaultValue={props.description}
         onChange={handleTextAreaChange}>
       </textarea>
     </div>
@@ -230,7 +163,7 @@ export default function UploadForm() {
         <input type="text"
         name="tag"
         className={styles["text-input"]}
-        placeholder="Add a tag"
+        placeholder="Add a tag and press Enter to save"
         onKeyDown={handleKeyDown}/>
         <span className={styles.infoToolTip} id="tagInfoTooltip">?</span>
       </div>
@@ -244,20 +177,6 @@ export default function UploadForm() {
         </div>
 
     </div>
-
-    {/* Section for selecting the collection */}
-    <div className={styles["collection-list"]}>
-      <p className="h5">Choose a Collection</p>
-      <input
-        id="input-collection-name"
-        type="text"
-        name="collectionName"
-        required
-        className={styles["text-input"]}
-        placeholder="Search collection or enter collection to create"
-        onChange={handleCollectionNameChange}/>
-    </div>
-
 
     <input
       type="submit"

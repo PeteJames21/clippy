@@ -39,8 +39,8 @@ model TextItem {
   content      String     @db.VarChar(1500)
   description  String     @db.VarChar(1000)
   tags         String?    @db.VarChar(100)
-  collection   Collection @relation(fields: [collectionId], references: [id])
-  collectionId Int
+  collection   Collection @relation(fields: [collectionID], references: [id])
+  collectionID Int
   userID       Int
   user         User       @relation(fields: [userID], references: [id])
 

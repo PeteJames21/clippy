@@ -9,7 +9,7 @@ export default function TagListItem({label, itemId}) {
       <Image
         id={itemId}
         className={styles["trash-icon"]}
-        src="trash-icon.svg" width={20} height={20}
+        src="/trash-icon.svg" width={20} height={20}
         alt=""/>
     </div>
   );
