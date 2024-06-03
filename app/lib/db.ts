@@ -81,6 +81,13 @@ export async function getAllCollections(userID?: number) {
     collections = await prisma.collection.findMany({
       where: {
         public: true
+      },
+      include: {
+        _count: {
+          select:{
+            items: true
+          }
+        }
       }
     });
   }
@@ -90,6 +97,13 @@ export async function getAllCollections(userID?: number) {
         OR: [
           {public: true}, {userID}
         ]
+      },
+      include: {
+        _count: {
+          select:{
+            items: true
+          }
+        }
       }
     });
   }

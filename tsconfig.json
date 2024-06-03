@@ -32,7 +32,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "app/ui/dashboard/sidenav.tsx"  ],
   "exclude": [
     "node_modules"
   ]

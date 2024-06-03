@@ -1,6 +1,7 @@
+import { cookies } from "next/headers";
 import { NextRequest } from "next/server";
 
-type SessionUser = {
+export type SessionUser = {
   email: string,
   id: number
 }
@@ -18,10 +19,25 @@ export async function getSession(req: NextRequest) {
 
 
 /**
- * Get user from the session. Note that the password field is excluded
+ * Get user from the session. Note that the password field is excluded. Use this
+ * only in API routes
  */
 export async function getUserFromSession(req: NextRequest): Promise<SessionUser> {
   const session = await getSession(req);
+  if (session) {
+    const user: SessionUser = session.user;
+    return user;
+  }
+  else {
+    return null;
+  }
+}
+
+/**
+ * Get user from the session. To be used only in server components
+ */
+export function _getUserFromSession(): SessionUser {
+  const session = JSON.parse(cookies().get("session").value);
   if (session) {
     const user: SessionUser = session.user;
     return user;
