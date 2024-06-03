@@ -5,10 +5,6 @@ import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 
 export default function Layout ({ children }) {
-  const session = cookies().get("session");
-    if (!session || !session.value) {
-      return redirect("/login");
-    }
   return (
     <div className={styles.app}>
       <Header />

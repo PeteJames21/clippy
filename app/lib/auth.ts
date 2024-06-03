@@ -37,7 +37,8 @@ export async function getUserFromSession(req: NextRequest): Promise<SessionUser>
  * Get user from the session. To be used only in server components
  */
 export function _getUserFromSession(): SessionUser {
-  const session = JSON.parse(cookies().get("session").value);
+  const _session =  cookies().get("session")?.value
+  const session = _session? JSON.parse(_session): null;
   if (session) {
     const user: SessionUser = session.user;
     return user;
