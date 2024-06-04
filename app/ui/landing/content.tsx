@@ -16,7 +16,7 @@ const Content: React.FC = () => {
                 <h1 className={styles.changingHead}>Just Clip It</h1>
                 <p className={styles.catchPhrase}>A simpler way to do the things you do.</p>
                 <Link href="/dashboard">
-                    <button className={styles.cta}>Get Started</button>
+                    <button className={styles.cta}>Login/Register</button>
                 </Link>
             </div>
             <div className={styles.imageContent}></div>
