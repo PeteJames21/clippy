@@ -5,6 +5,7 @@ import styles from './dashboard.module.css';
 import { usePathname } from 'next/navigation';
 import { CollectionWithCount } from '@/app/lib/types';
 import { Collection } from '@prisma/client';
+import Image from 'next/image';
 
 export default function CollectionBox(
   {title, collections, fullHeight}:
@@ -38,7 +39,7 @@ function CollectionItem({ item }: {item: Collection}) {
     <div>
       <Link href={`${path}?collectionId=${item.id}`} className="link-primary">
         <div className={styles["collection-item"]} data-toggle="tooltip" data-placement="right" title={item.description}>
-          <img src={item.imgPath? item.imgPath: "/icons/code.png"} width={20} height={20} />
+          <Image src={item.imgPath? item.imgPath: "/icons/code.png"} width={20} height={20} alt="code icon"/>
           <span>{item.name}</span>
           <CounterBadge n_items={(item as CollectionWithCount)._count.items}/>
         </div>

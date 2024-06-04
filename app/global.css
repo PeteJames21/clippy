@@ -32,3 +32,22 @@ a {
 .background-default {
   background: linear-gradient(to right, #74ebd5, #ACB6E5);
 }
+
+.clippyDropDownMenu {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  width: fit-content;
+}
+
+
+.clippyDropDownMenuItem {
+  color: black;
+  padding: 5px;
+}
+
+.clippyDropDownMenuItem:hover {
+  font-weight: bold;
+  color: black;
+}

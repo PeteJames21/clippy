@@ -123,8 +123,9 @@ background-image: linear-gradient( 89.5deg,  rgba(131,204,255,1) 0.4%, rgba(66,1
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-  /* height: 100px; */
-
+  height: 100%;
+  margin-top: 5px;
+  gap: 5px;
 }
 
 .collection-item {
@@ -132,8 +133,7 @@ background-image: linear-gradient( 89.5deg,  rgba(131,204,255,1) 0.4%, rgba(66,1
   align-items: center;
   flex-direction: row;
   padding-left: 10px;
-  width: 90%;
-  margin-top: 10px;
+  width: 95%;
   gap: 10px;
 }
 
@@ -144,7 +144,6 @@ background-image: linear-gradient( 89.5deg,  rgba(131,204,255,1) 0.4%, rgba(66,1
 .counter-badge {
   color: black;
   max-width: fit-content;
-  height: inherit;
   border: 1px solid black;
   margin-left: auto;
   border-radius: 15%;

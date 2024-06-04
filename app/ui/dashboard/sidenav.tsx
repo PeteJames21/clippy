@@ -4,6 +4,7 @@ import CollectionBox from './collection_list'
 import { SessionUser, _getUserFromSession } from '@/app/lib/auth';
 import { Collection } from '@prisma/client';
 import { getAllCollections } from '@/app/lib/db';
+import AddButton from './add_button';
 
 export default async function SideNav() {
   const user: SessionUser = _getUserFromSession();
@@ -29,9 +30,7 @@ export default async function SideNav() {
   }
   return (
     <div className={styles.sidenav}>
-      <Link href="/create/item">
-        <button className="btn btn-primary btn-lg btn-block">+ Add Item</button>
-      </Link>
+      <AddButton />
       <CollectionBox title="Public Collections" collections={publicCollections} fullHeight={fullHeight}/>
       { user? <CollectionBox title="Your Private Collections" collections={privateCollections} fullHeight={fullHeight}/>: ""}
     </div>
