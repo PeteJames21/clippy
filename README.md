@@ -11,16 +11,16 @@ The application is currently hosted at http://clippy.peterndungu.tech
 1. Create `collections` into which to store your code snippets. Collections function like folders. It is recommended to store related items under one collection, e.g. SQL code snippets can be saved under a collection called `SQL code snippets`.
 2. When creating the collections, specify whether the collection is `public` or `private`. Items in `public` collections can be viewed by all users. Other users can also add items into them. However, each item can only modified by its original author. On the other hand, a `private` collection is only visible to its author.
    <br>
-   <img src="images/create-a-collection.png" width="300"/>
+   <img src="images/create-a-collection.png" width="500"/>
    <br>
 3. Add an item to a collection and provide an optional `description`, e.g. what it does. Also provide up to 5 optional `tags` that can be used to optimize searches. See example below
    <br>
-   <img src="images/upload-item-1.png" width="300"/>
-   <img src="images/upload-item-2.png" width="300"/>
+   <img src="images/upload-item-1.png" width="500"/>
+   <img src="images/upload-item-2.png" width="500"/>
    <br>
 4. Search for items using the search bar. Items can be searched for based on keywords from the content, description, or tags
    <br>
-   <img src="images/search.png" width="300"/>
+   <img src="images/search.png" width="500"/>
    <br>
 5. Click on an item card to copy its contents to the clipboard and paste it wherever you want.
 6. Edit saved collections and items.
