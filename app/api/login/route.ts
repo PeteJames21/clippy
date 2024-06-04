@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 import { getSession, getSessionExpiration } from "@/app/lib/auth";
 import { cookies } from "next/headers";
+import prisma from "@/app/lib/prisma_client";
 
 export async function POST(req: NextRequest) {
   // Verify that no other session is in progress
@@ -14,7 +14,6 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const prisma = new PrismaClient();
   const formData = await req.formData();
   const email = formData.get("email").toString();
   const password = formData.get("password").toString();

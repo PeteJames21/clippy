@@ -2,6 +2,7 @@
 import React from 'react';
 import useChangingHeading from './useChangingHeading';
 import styles from './landing.module.css';
+import Link from 'next/link';
 
 const Content: React.FC = () => {
     const changingHeadingRef = useChangingHeading();
@@ -14,7 +15,9 @@ const Content: React.FC = () => {
                 </h1>
                 <h1 className={styles.changingHead}>Just Clip It</h1>
                 <p className={styles.catchPhrase}>A simpler way to do the things you do.</p>
-                <button className={styles.cta}>Get Started</button>
+                <Link href="/dashboard">
+                    <button className={styles.cta}>Get Started</button>
+                </Link>
             </div>
             <div className={styles.imageContent}></div>
         </div>

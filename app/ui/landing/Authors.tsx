@@ -14,11 +14,11 @@ const Authors: React.FC = () => {
               <div className={styles.author}>
                   <img src={pete.src} alt="Author 1" className={styles.authorImage} />
                   <p className={styles.authorDescription}>
-                      Peter Ndung'u is a software engineer with expertise in Python, JavaScript.
+                      Peter Ndung'u is a software engineer and analytical chemist. He specializes with Python & JavaScript backends and data science solutions. You can reach him via:
                   </p>
                   <div className={styles.socialMediaHandles}>
-                      <a href="https://github.com/PeteJames21" target="_blank" rel="noopener noreferrer">Github:</a>
-                      <a href="https://www.linkedin.com/in/peter-ndungu-101/" target="_blank" rel="noopener noreferrer">LinkedIn:</a>
+                      <a href="https://github.com/PeteJames21" target="_blank" rel="noopener noreferrer">Github</a>
+                      <a href="https://www.linkedin.com/in/peter-ndungu-101/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
                   </div>
               </div>
               <div className={styles.author}>
@@ -27,8 +27,8 @@ const Authors: React.FC = () => {
                       Benson Maina is an Software Engineer with expertise in Python, JavaScript and Linux. When he is not coding, he is crafting water and energy solutions in Civil engineering. You can reach him via:
                   </p>
                   <div className={styles.socialMediaHandles}>
-                      <a href="https://github.com/Gabogogi" target="_blank" rel="noopener noreferrer">Github:</a>
-                      <a href="https://www.linkedin.com/in/benson-maina-a47b05295/" target="_blank" rel="noopener noreferrer">LinkedIn:</a>
+                      <a href="https://github.com/Gabogogi" target="_blank" rel="noopener noreferrer">Github</a>
+                      <a href="https://www.linkedin.com/in/benson-maina-a47b05295/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
                   </div>
               </div>
           </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './landing.module.css';
 
 const AboutUs: React.FC = () => {
-    const randomText = "This project aims to streamline your workflow by offering a simple, intuitive interface and powerful features designed to enhance productivity and collaboration. Built with modern technologies, our solution ensures a seamless experience across all devices, making it easier to manage tasks and projects efficiently.";
+    const randomText = "Clippy strives to streamline your coding experience by providing a centralized repository for commonly used code snippets. Its intuitive interface allows you to quickly add, retrieve, and share reusable items. Open source and free forever. Get started now!";
 
     return (
         <div className={styles.aboutContainer} id="about">

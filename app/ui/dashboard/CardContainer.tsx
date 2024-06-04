@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import Card from './Card';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import styles from "@/app/ui/dashboard/dashboard.module.css";
 
 export default function CardContainer() {
@@ -39,7 +39,7 @@ export default function CardContainer() {
             bodyContent={item.content}
             footerContent={{
               tags: item.tags,
-              collection: item.collectionId
+              collection: item.collection?.name
             }}
           />
         ))}

@@ -1,41 +1,27 @@
 import { getUserFromSession } from "@/app/lib/auth";
-import { PrismaClient, TextItem } from "@prisma/client";
+import { getAllTextItems, getItemsFromCollection, searchItems } from "@/app/lib/db";
+import { TextItem } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
   const user = await getUserFromSession(req);
-  if (user === null) {
-    return NextResponse.json({message: "No user credentials found"}, {status: 401});
-  }
+  const userID = user?.id;
 
-  const prisma = new PrismaClient();
   const params = req.nextUrl.searchParams;
   const collectionID = Number(params.get("collectionId"));
   const q = params.get("q");  // Entry from the search bar
   try {
     let items: TextItem[];
     if (q) {
-      items = await prisma.$queryRaw`SELECT * FROM TextItem WHERE (userID = ${user.id} OR public = true) AND MATCH (content, description, tags) AGAINST (${q} IN NATURAL LANGUAGE MODE);`
+      items = await searchItems(q, userID);
     }
     else if (collectionID){
-      // From the specified collection, get all items belonging to the
-      // user and items from other users marked as public.
-      items = await prisma.textItem.findMany({
-        where: {
-          collectionID,
-          OR: [
-            {userID: user.id}, {public: true}
-          ]
-        }
-      });
+      items = await getItemsFromCollection(collectionID, userID)
+      console.log(items);
     }
     else {
-      // Return all items from the database belonging to the user
-      items = await prisma.textItem.findMany({
-        where: {
-          userID: user.id
-        }
-      });
+      // Return all items from the database
+      items = await getAllTextItems(userID);
     }
     return NextResponse.json(JSON.stringify(items), {status: 200});
   }

@@ -1,8 +1,7 @@
-import { Collection, PrismaClient, TextItem } from "@prisma/client";
+import { Collection, TextItem } from "@prisma/client";
 import { CollectionProps } from "../ui/forms/create_collection";
 import { TextItemProps } from "./types";
-
-const prisma = new PrismaClient();
+import prisma from "@/app/lib/prisma_client";
 
 /**
  * Create a collection and return its id, or update existing record
@@ -170,4 +169,83 @@ export async function createOrUpdateTextItem(data: TextItemProps) {
     });
   }
   return item.id;
+}
+
+export async function getAllTextItems(userID?: number) {
+  // If user not specified, get all public items, otherwise get all public
+  // items plus the user's private items
+  let items: TextItem[];
+
+  if (!userID) {
+    items = await prisma.textItem.findMany({
+      where: {
+        public: true
+      },
+      include: {
+        collection: {
+          select: {
+            name: true
+          }
+        }
+      }
+    });
+  }
+  else {
+    items = await prisma.textItem.findMany({
+      where: {
+        OR: [
+          {userID: userID, public: true}
+        ]
+      }
+    });
+  }
+
+  return items;
+}
+
+/**
+ *
+ * Return items from the collection only if the collection is public
+ * or if it belongs to the specified user
+ */
+export async function getItemsFromCollection(collectionID: number, userID?: number) {
+  const collection = await getCollection(collectionID);
+  let items: TextItem[];
+  if (collection.public || collection.userID === userID) {
+    items = await prisma.textItem.findMany({
+      where: {
+        collectionID
+      },
+      include: {
+        collection: {
+          select: {
+            name: true
+          }
+        }
+      }
+
+    });
+  }
+  else {
+    throw new Error("User does not have permission to view this collection");
+  }
+
+  return items;
+}
+
+/**
+ * Return a list of items that match the specified text
+ */
+export async function searchItems(q: string, userID?: number) {
+  // If userID is not specified, only search for public items that match the criteria.
+  // If userID is specified, the items should either be public or belong to the user
+  let items: TextItem[];
+
+  if (userID) {
+    items = await prisma.$queryRaw`SELECT * FROM TextItem WHERE (userID = ${userID} OR public = true) AND MATCH (content, description, tags) AGAINST (${q} IN NATURAL LANGUAGE MODE);`
+  }
+  else {
+    items = await prisma.$queryRaw`SELECT * FROM TextItem WHERE (public = true) AND MATCH (content, description, tags) AGAINST (${q} IN NATURAL LANGUAGE MODE);`
+  }
+  return items;
 }

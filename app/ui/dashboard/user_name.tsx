@@ -1,4 +1,3 @@
-import { getUserFromSession } from "@/app/lib/auth";
 import { cookies } from "next/headers";
 
 export default function UserNameDiv() {

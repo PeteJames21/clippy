@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { Collection, TextItem } from "@prisma/client";
 import { getUserFromSession } from "@/app/lib/auth";
 import { TextItemProps } from "@/app/lib/types";
 import { createOrUpdateTextItem, getCollection } from "@/app/lib/db";

@@ -7,7 +7,7 @@ import ProjectScreenshots from '@/app/ui/landing/projectScreenshots';
 import Authors from '../ui/landing/Authors';
 import Footer from '../ui/landing/Footer';
 
-import './global.css';   // Assuming you have the same CSS
+import styles from "@/app/ui/landing/landing.module.css"
 
 const App: React.FC = () => {
     const scrollToAbout = () => {
@@ -23,7 +23,7 @@ const App: React.FC = () => {
         }
     };
     return (
-        <div>
+        <div className={`${styles.body}`}>
             <NavBar scrollToAbout={scrollToAbout} scrollToAuthors={scrollToAuthors}/> {/* Might need to use the already created navbar component */}
             <Content />
             <AboutUs />

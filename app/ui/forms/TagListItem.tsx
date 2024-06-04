@@ -1,6 +1,5 @@
 import Image from "next/image";
 import styles from "./forms.module.css";
-import { MouseEvent } from "react";
 
 export default function TagListItem({label, itemId}) {
   return (

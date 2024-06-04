@@ -9,15 +9,15 @@ const ProjectScreenshots: React.FC = () => {
         <div className={styles.screenshotContainer}>
             <div className={styles.screenshot}>
                 <img src={login.src} alt="Screenshot 1" className={styles.imageScreenshot} />
-                <p className={styles.description}>A user will register and login into their account</p>
+                <p className={styles.description}>Register and login into your account</p>
             </div>
             <div className={styles.screenshot}>
                 <img src={add_item.src} alt="Screenshot 2" className={styles.imageScreenshot} />
-                <p className={styles.description}>One ca easily add an item into the database</p>
+                <p className={styles.description}>Add new items to your database</p>
             </div>
             <div className={styles.screenshot}>
                 <img src={dashboard.src} alt="Screenshot 3" className={styles.imageScreenshot} />
-                <p className={styles.description}>This is an overview of the dashboard.</p>
+                <p className={styles.description}>An overview of the dashboard.</p>
             </div>
         </div>
     );

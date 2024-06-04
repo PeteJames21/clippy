@@ -1,8 +1,6 @@
 import Header from "../ui/dashboard/header";
 import SideNav from "../ui/dashboard/sidenav";
 import styles from "../ui/dashboard/dashboard.module.css"
-import { redirect } from "next/navigation";
-import { cookies } from "next/headers";
 
 export default function Layout ({ children }) {
   return (

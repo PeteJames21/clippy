@@ -6,7 +6,6 @@ export default function LogoutButton() {
   const router = useRouter();
 
   async function handleLogout() {
-      console.log("logging out");
       const result = await fetch("/api/logout", {
         method: "POST",
         body: new FormData()

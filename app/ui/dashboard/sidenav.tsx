@@ -1,5 +1,4 @@
 import styles from './dashboard.module.css';
-import Link from 'next/link';
 import CollectionBox from './collection_list'
 import { SessionUser, _getUserFromSession } from '@/app/lib/auth';
 import { Collection } from '@prisma/client';

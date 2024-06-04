@@ -1,10 +1,9 @@
 "use client";
 import styles from "@/app/ui/dashboard/dashboard.module.css";
 import { usePathname, useRouter } from "next/navigation";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent } from "react";
 
 export default function SearchContainer() {
-  const [text, setText] = useState("");
   const path = usePathname();
   const router = useRouter();
 

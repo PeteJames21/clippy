@@ -1,6 +1,6 @@
 import CreateCollectionForm from "@/app/ui/forms/create_collection";
 import { cookies } from "next/headers";
-import { redirect, useSearchParams } from "next/navigation";
+import { redirect } from "next/navigation";
 import {CollectionProps} from "@/app/ui/forms/create_collection"
 import { getCollection } from "@/app/lib/db";
 

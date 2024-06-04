@@ -8,6 +8,7 @@
   top: 0;
   left: 0;
   z-index: 1000;
+  height: 70px;
 }
 
 .navbar ul {
@@ -154,4 +155,16 @@
   margin-top: 10px;
   font-size: 1em;
   color: #333;
+}
+
+/* global.css */
+.body {
+  font-family: 'Arial', sans-serif;
+  margin: 0px;
+  color: #000;
+  margin-top: 70px;
+  background: url('../../../public/background.png') center/cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
