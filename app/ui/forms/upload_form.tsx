@@ -116,7 +116,9 @@ export default function UploadForm({props} : {props: TextItemProps}) {
 
   return (
     <form action="" id="upload-form" className={styles.upload_form}>
-      <p className="h3 text-center">Upload a New Item</p>
+      <p className="h3 text-center">
+        {props.id? "Update Item Details": "Upload a New Item"}
+      </p>
 
     {/* Section for selecting the collection */}
     <div className={styles["collection-list"]}>
@@ -181,7 +183,7 @@ export default function UploadForm({props} : {props: TextItemProps}) {
     <input
       type="submit"
       className={`btn btn-primary btn-lg btn-block ${styles["upload-button"]}`}
-      value={"Upload"}
+      value={props.id? "Update": "Create"}
     />
     </form>
   );
