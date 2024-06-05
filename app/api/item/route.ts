@@ -16,8 +16,7 @@ export async function GET(req: NextRequest) {
       items = await searchItems(q, userID);
     }
     else if (collectionID){
-      items = await getItemsFromCollection(collectionID, userID)
-      console.log(items);
+      items = await getItemsFromCollection(collectionID, userID);
     }
     else {
       // Return all items from the database
