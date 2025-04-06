@@ -2,7 +2,6 @@
 
 Clippy is a web application that strives to streamline the coding experience by providing a centralized repository for commonly used code snippets. Its intuitive interface allows users to quickly add, retrieve, and share reusable code snippets.
 
-The application is currently hosted at http://clippy.peterndungu.tech
 
 **NOTE**: the URL is only for demonstration purposes and subject to change once the project has been fully deployed.
 
