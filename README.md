@@ -2,9 +2,6 @@
 
 Clippy is a web application that strives to streamline the coding experience by providing a centralized repository for commonly used code snippets. Its intuitive interface allows users to quickly add, retrieve, and share reusable code snippets.
 
-
-**NOTE**: the URL is only for demonstration purposes and subject to change once the project has been fully deployed.
-
 # Features
 
 1. Create `collections` into which to store your code snippets. Collections function like folders. It is recommended to store related items under one collection, e.g. SQL code snippets can be saved under a collection called `SQL code snippets`.
